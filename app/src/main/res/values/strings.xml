@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">JobsNow</string>
+    <string name="Welcome">Welcome !</string>
+    <string name="submit_button_connection">Connect</string>
+    <string name="password_input">Password</string>
+    <string name="email_input">Email</string>
+    <string name="create_account_proposition">New in here? <b>Sign up</b></string>
+    <string name="description_sing_up_text">Let\'s find a job for you !</string>
+    <string name="todo">TODO</string>
+    <string name="job_title">Job Title</string>
+    <string name="duration">Duration</string>
+    <string name="remuneration">Remuneration</string>
+    <string name="sign_up">Sign Up</string>
+
 </resources>

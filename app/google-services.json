@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "254432569693",
+    "project_id": "jobsnow-34230",
+    "storage_bucket": "jobsnow-34230.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254432569693:android:27700703b774f15317a0b4",
+        "android_client_info": {
+          "package_name": "com.ocr1.jobsnow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254432569693-fgdnsbavmfr662i8egtj3ghcpagv7k90.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7GN8tfr35L-ns1O93TJZ2ffXMOnzN-1A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254432569693-fgdnsbavmfr662i8egtj3ghcpagv7k90.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

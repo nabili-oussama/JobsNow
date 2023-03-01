@@ -9,6 +9,7 @@
     <string name="todo">TODO</string>
     <string name="job_title">Job Title</string>
     <string name="duration">Duration</string>
+    <string name="description">Description</string>
     <string name="remuneration">Remuneration</string>
     <string name="sign_up">Sign Up</string>
 

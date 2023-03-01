@@ -38,6 +38,15 @@
             android:textColor="@color/black"
             android:textSize="18sp" />
 
+        <TextView
+            android:id="@+id/job_offer_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/description"
+            android:textColor="@color/black"
+            android:visibility="invisible"
+            android:textSize="18sp" />
+
     </LinearLayout>
 
 </Button>

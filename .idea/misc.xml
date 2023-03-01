@@ -7,9 +7,10 @@
         <entry key="..\:/Android/AndroidStudioProjects/JobsNow/app/src/main/res/drawable/jobs.xml" value="0.264" />
         <entry key="..\:/Android/AndroidStudioProjects/JobsNow/app/src/main/res/drawable/rectangle.xml" value="0.2595" />
         <entry key="..\:/Android/AndroidStudioProjects/JobsNow/app/src/main/res/drawable/welcome.xml" value="0.2595" />
+        <entry key="..\:/Android/AndroidStudioProjects/JobsNow/app/src/main/res/layout/activity_job_offer_details.xml" value="0.23809523809523808" />
         <entry key="..\:/Android/AndroidStudioProjects/JobsNow/app/src/main/res/layout/activity_main.xml" value="0.25226449275362317" />
-        <entry key="..\:/Android/AndroidStudioProjects/JobsNow/app/src/main/res/layout/activity_sign_in.xml" value="0.2" />
-        <entry key="..\:/Android/AndroidStudioProjects/JobsNow/app/src/main/res/layout/activity_sign_up.xml" value="0.20622568093385213" />
+        <entry key="..\:/Android/AndroidStudioProjects/JobsNow/app/src/main/res/layout/activity_sign_in.xml" value="0.264" />
+        <entry key="..\:/Android/AndroidStudioProjects/JobsNow/app/src/main/res/layout/activity_sign_up.xml" value="0.264" />
         <entry key="..\:/Android/AndroidStudioProjects/JobsNow/app/src/main/res/layout/button_job_offers.xml" value="0.25226449275362317" />
       </map>
     </option>

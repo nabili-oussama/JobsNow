@@ -1,9 +1,9 @@
 package com.ocr1.jobsnow;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,99 +14,72 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class JobOfferAdapter extends RecyclerView.Adapter<JobOfferAdapter.ViewHolder> {
-    private final List<JobOffer> mJobOffers;
-    private final OnJobOfferClickListener mListener;
-    private final DatabaseReference mDatabaseRef;
-    private final ValueEventListener mValueEventListener;
-    private RecyclerView mRecyclerView;
 
-    public JobOfferAdapter(RecyclerView recyclerView, OnJobOfferClickListener listener) {
-        mListener = listener;
+    Context context;
 
-        // Initialize Firebase Database reference
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("jobOffers");
+    ArrayList<JobOffer> list;
+    private OnJobOfferClickListener onJobOfferClickListener;
 
-        // Initialize value event listener to retrieve job offers from Firebase Database
-        mValueEventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                mJobOffers.clear();
-                for (DataSnapshot jobOfferSnapshot : dataSnapshot.getChildren()) {
-                    JobOffer jobOffer = jobOfferSnapshot.getValue(JobOffer.class);
-                    mJobOffers.add(jobOffer);
-                }
-                notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Do nothing
-            }
-        };
-
-        // Attach value event listener to Firebase Database reference
-        mDatabaseRef.addValueEventListener(mValueEventListener);
-
-        mJobOffers = new ArrayList<>();
-        mRecyclerView = recyclerView;
+    public JobOfferAdapter(Context context, ArrayList<JobOffer> list) {
+        this.context = context;
+        this.list = list;
     }
 
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.button_job_offers, parent, false);
-        return new ViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        JobOffer jobOffer = mJobOffers.get(position);
-        holder.bind(jobOffer);
-    }
-
-    @Override
-    public int getItemCount() {
-        return mJobOffers.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView mTitleTextView;
-        private final TextView mDescriptionTextView;
-        private final TextView mSalaryTextView;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-
-            mTitleTextView = itemView.findViewById(R.id.job_offer_title);
-            mDescriptionTextView = itemView.findViewById(R.id.job_offer_description);
-            mSalaryTextView = itemView.findViewById(R.id.job_offer_remuneration);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION) {
-                        JobOffer jobOffer = mJobOffers.get(position);
-                        mListener.onJobOfferClick(jobOffer);
-                    }
-                }
-            });
-        }
-
-        public void bind(JobOffer jobOffer) {
-            mTitleTextView.setText(jobOffer.getTitle());
-            mDescriptionTextView.setText(jobOffer.getDescription());
-            mSalaryTextView.setText(jobOffer.getRemuneration());
-        }
+    public void setOnJobOfferClickListener(OnJobOfferClickListener onJobOfferClickListener) {
+        this.onJobOfferClickListener = onJobOfferClickListener;
     }
 
     public interface OnJobOfferClickListener {
         void onJobOfferClick(JobOffer jobOffer);
+    }
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(context).inflate(R.layout.item,parent,false);
+        return new ViewHolder(v);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+        JobOffer user = list.get(position);
+        holder.Duration.setText(user.getDuration());
+        holder.Title.setText(user.getTitle());
+        holder.Remuneration.setText(user.getRemuneration());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onJobOfferClickListener != null) {
+                    onJobOfferClickListener.onJobOfferClick(user);
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return list.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder{
+
+       TextView Title, Duration, Remuneration;
+
+
+        public ViewHolder(@NonNull View itemView){
+            super(itemView);
+
+            Title = itemView.findViewById(R.id.jobTitle);
+            Duration = itemView.findViewById(R.id.jobDuration);
+            Remuneration = itemView.findViewById(R.id.jobRemuneration);
+        }
     }
 }

@@ -23,8 +23,8 @@
         android:layout_height="100dp"
         android:layout_above="@id/emailTil"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/welcomelogo"
-        android:contentDescription="TODO" />
+        android:contentDescription="TODO"
+        android:src="@drawable/welcomelogo" />
 
     <!--
     <TextView

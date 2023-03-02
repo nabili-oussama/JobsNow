@@ -1,7 +1,11 @@
 package com.ocr1.jobsnow;
 
-public class JobOffer {
-    private String ID;
+
+import java.io.Serializable;
+import java.util.UUID;
+
+public class JobOffer implements Serializable {
+
     private String title;
     private String description;
     private String duration;
@@ -12,20 +16,14 @@ public class JobOffer {
     }
 
     public JobOffer(String title, String description, String duration, String remuneration) {
+
         this.title = title;
         this.description = description;
         this.duration = duration;
         this.remuneration = remuneration;
-        this.ID = ID;
     }
 
-    public String getID(){
-        return ID;
-    }
 
-    public void setID(String ID) {
-        this.ID = ID;
-    }
 
     public String getTitle() {
         return title;

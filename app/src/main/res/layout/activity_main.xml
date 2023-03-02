@@ -45,7 +45,9 @@
             app:layout_anchor="@id/job_offer_list"
             app:layout_anchorGravity="bottom|end"
             app:contentDescription="@string/todo"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription">
+
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/disconnect_job_offer"

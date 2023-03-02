@@ -1,6 +1,7 @@
 package com.ocr1.jobsnow;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class JobOfferDetailsActivity extends AppCompatActivity {
@@ -24,6 +26,7 @@ public class JobOfferDetailsActivity extends AppCompatActivity {
     private EditText mRemunerationEditText;
     private Button mSaveButton;
     private Button mDeleteButton;
+    private String key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,25 @@ public class JobOfferDetailsActivity extends AppCompatActivity {
 
         // Get the job offer object passed from MainActivity
         JobOffer mJobOffer = (JobOffer) getIntent().getSerializableExtra("jobOffer");
+
+
+        DatabaseReference jobOfferRef = FirebaseDatabase.getInstance().getReference("job_offers");
+        Query query = jobOfferRef.orderByChild("title").equalTo(mJobOffer.getTitle());
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        key = snapshot.getKey();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         // Initialize UI elements
         mTitleEditText = findViewById(R.id.title_edit_text);
@@ -59,7 +81,7 @@ public class JobOfferDetailsActivity extends AppCompatActivity {
                 mJobOffer.setRemuneration(mRemunerationEditText.getText().toString());
 
                 // Save the modified job offer object to Firebase
-                DatabaseReference jobOfferRef = FirebaseDatabase.getInstance().getReference("job_offers").child(String.valueOf(mJobOffer));
+                DatabaseReference jobOfferRef = FirebaseDatabase.getInstance().getReference("job_offers").child(key);
                 jobOfferRef.setValue(mJobOffer);
 
                 // Finish the activity and return to MainActivity
@@ -71,7 +93,7 @@ public class JobOfferDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Delete the job offer object from Firebase
-                DatabaseReference jobOfferRef = FirebaseDatabase.getInstance().getReference("job_offers").child(String.valueOf(mJobOffer));
+                DatabaseReference jobOfferRef = FirebaseDatabase.getInstance().getReference("job_offers").child(key);
                 jobOfferRef.removeValue();
 
                 // Finish the activity and return to MainActivity
